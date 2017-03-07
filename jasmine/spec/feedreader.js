@@ -70,16 +70,16 @@ $(function() {
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
-         it('menu visible of first click', function () {
+         it('menu visibility toggles', function () {
              $('.menu-icon-link').click();
              expect($('body').hasClass('menu-hidden')).toBe(false);
              $('.menu-icon-link').click();
              expect($('body').hasClass('menu-hidden')).toBe(true);
          });
-
     });  // end of The menu suite
 
     /* TODO: Write a new test suite named "Initial Entries" */
+    describe('Initial Entries', function () {
 
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
@@ -87,6 +87,18 @@ $(function() {
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
+
+        // async call loadfeed, when done calls done into it spec
+        beforeEach(function (done) {
+           loadFeed(0);
+           done();
+        });
+
+        it('loadFeed returns at list one .entry element', function () {
+            expect($('.feed').find('.entry').length).not.toBe(0);
+        })
+
+    });  // end suite Initial Entries
 
     /* TODO: Write a new test suite named "New Feed Selection"
 
