@@ -90,20 +90,37 @@ $(function() {
 
         // async call loadfeed, when done calls done into it spec
         beforeEach(function (done) {
-           loadFeed(0);
-           done();
+           loadFeed(0, done);
+           // done();
         });
 
-        it('loadFeed returns at list one .entry element', function () {
+        it('loadFeed returns at list one .entry element', function (done) {
             expect($('.feed').find('.entry').length).not.toBe(0);
+            done();
         })
 
     });  // end suite Initial Entries
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+    // TODO: Write a new test suite named "New Feed Selection"
+   describe('New Feed Selection', function () {
 
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+       /* TODO: Write a test that ensures when a new feed is loaded
+        * by the loadFeed function that the content actually changes.
+        * Remember, loadFeed() is asynchronous.
+        */
+       var first, second;
+
+       // get first feed text returned in prior spec
+       beforeEach(function (done) {
+            first = $('feed').children().text();
+            loadFeed(1, done);
+       });
+
+       it('new feed selection changes content', function (done) {
+           second = $('feed').children().text();
+           expect(first.not.toMatch(second));
+       })
+
+   });
+
 }());
