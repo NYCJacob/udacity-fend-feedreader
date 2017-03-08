@@ -108,17 +108,24 @@ $(function() {
         * by the loadFeed function that the content actually changes.
         * Remember, loadFeed() is asynchronous.
         */
-       var first, second;
+       var first;
+       var second;
 
        // get first feed text returned in prior spec
        beforeEach(function (done) {
-            first = $('feed').children().text();
-            loadFeed(1, done);
+           loadFeed(0, function () {
+               first = $('.feed').find('.entry').text();
+               loadFeed(1, function () {
+                   second = $('.feed').find('.entry').text();
+                   done();
+               });
+           });
+
        });
 
        it('new feed selection changes content', function (done) {
-           second = $('feed').children().text();
-           expect(first.not.toMatch(second));
+           expect(first).not.toEqual(second);
+           done();
        })
 
    });
