@@ -76,14 +76,12 @@ $(function() {
          */
 
         // async call loadfeed, when done calls done into it spec
-        beforeEach(function (done) {
+        beforeEach(function () {
            loadFeed(0, done);
-           // done();
         });
 
         it('loadFeed returns at list one .entry element', function (done) {
             expect($('.feed').find('.entry').length).not.toBe(0);
-            done();
         })
 
     });  // end suite Initial Entries
