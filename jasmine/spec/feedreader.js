@@ -49,8 +49,6 @@ $(function() {
                 expect(feed.name.length).not.toBe(0);
             })
         });
-
-
     });
 
 
